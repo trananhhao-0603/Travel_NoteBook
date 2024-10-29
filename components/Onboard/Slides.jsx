@@ -1,10 +1,11 @@
 import { View, Image } from 'react-native'
 import React from 'react'
 import styles from './slides.style'
-import {ReusableBtn, ReusableText} from '../../components/index.js'
+import {HeightSpacer, ReusableBtn, ReusableText} from '../../components/index.js'
 import { COLORS, SIZES } from '../../constants/theme'
-
+import { useNavigation } from '@react-navigation/native'
 const Slides = ({item}) => {
+  const navigation = useNavigation();
   return (
     <View>
       <Image source={item.image} style={styles.image} />
@@ -16,8 +17,10 @@ const Slides = ({item}) => {
         color={COLORS.white}
         />
 
+        <HeightSpacer height={20}/>
+
         <ReusableBtn  
-        onPress={()=> {}}
+        onPress={()=> navigation.navigate('Bottom')}
         btnText={"Let's go"}
         width={(SIZES.width-50)/2.2}
         backgroundColor={COLORS.red}
