@@ -74,7 +74,7 @@ const BottomTabNavigation = () => {
                 headerShown: false,
                 tabBarIcon: ({focused}) => (
                     <Ionicons
-                    name={focused ? 'chatbox-ellipses' : 'chatbox-ellipses-outline'}
+                    name={focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline'}
                     color={focused ? COLORS.red : COLORS.gray}
                     size={26}
                     />
