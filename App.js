@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from './screens/onboarding/Onboarding';
 import BottomTabNavigation from './navigation/BottomTabNavigation';
-import { Search } from './screens';
+import { Search, CountryDetails } from './screens';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +34,7 @@ export default function App() {
         <Stack.Screen name='Onboard' component={Onboarding} options={{headerShown: false}}/>
         <Stack.Screen name='Bottom' component={BottomTabNavigation} options={{headerShown: false}}/>
         <Stack.Screen name='Search' component={Search} options={{headerShown: false}}/>
+        <Stack.Screen name='CountryDetails' component={CountryDetails} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
