@@ -1,7 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-
-const CountryDetails = () => {
+import { useRoute } from '@react-navigation/native'
+const CountryDetails = ({navigation}) => {
+  const route = useRoute();
+  const {item} = route.params;
+  console.log(item);
   return (
     <View>
       <Text>CountryDetails</Text>

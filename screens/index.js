@@ -5,7 +5,10 @@ import Chat from "./chat/Chat";
 import Profile from "./profile/Profile";
 import Search from "./search/Search";
 import CountryDetails from "./Details/CountryDetails";
-
+import Recommended from "./Details/Recommended"
+import PlaceDetails from "./Details/PlaceDetails";
+import HotelDetails from "./Details/HotelDetails";
+import HotelList from "./Details/HotelList";
 export {
     Onboarding,
     Home,
@@ -13,5 +16,9 @@ export {
     Chat,
     Profile,
     Search,
-    CountryDetails
+    CountryDetails,
+    Recommended,
+    PlaceDetails,
+    HotelDetails,
+    HotelList
 }
