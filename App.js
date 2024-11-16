@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from './screens/onboarding/Onboarding';
 import BottomTabNavigation from './navigation/BottomTabNavigation';
-import { Search, CountryDetails, Recommended, PlaceDetails, HotelDetails, HotelList } from './screens';
+import { Search, CountryDetails, Recommended, PlaceDetails, HotelDetails, HotelList, HotelSearch } from './screens';
 
 
 const Stack = createNativeStackNavigator();
@@ -39,6 +39,7 @@ export default function App() {
         <Stack.Screen name='PlaceDetails' component={PlaceDetails} options={{headerShown: false}}/>
         <Stack.Screen name='HotelDetails' component={HotelDetails} options={{headerShown: false}}/>
         <Stack.Screen name='HotelList' component={HotelList} options={{headerShown: false}}/>
+        <Stack.Screen name='HotelSearch' component={HotelSearch} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

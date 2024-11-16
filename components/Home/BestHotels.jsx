@@ -57,7 +57,7 @@ const BestHotels = () => {
         }
     ]
   return (
-    <View>
+    <View >
       <View style={[reusable.rowWithSpace('space-between'),{paddingBottom: 20}]}>
         <ReusableText
           text= {'Neary Hotels'}
