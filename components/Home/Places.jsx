@@ -62,7 +62,7 @@ const Places = () => {
       showsHorizontalScrollIndicator={false}
       getItemCount={(data) => data.length}
       getItem={(data,index) => data[index]}
-      renderItem={({item, index}) => (
+      renderItem={({item}) => (
         <View style={{marginRight:SIZES.xSmall}}>
             <Country item={item}/>
         </View>

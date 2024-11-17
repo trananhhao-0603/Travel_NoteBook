@@ -5,7 +5,6 @@ import HeightSpacer from "./Reusable/HeightSpacer";
 import NetworkImage from "./Reusable/NetworkImage";
 import Rating from "./Reusable/Rating";
 import DescriptionText from "./Reusable/DescriptionText";
-import PopularList from "./Country/PopularList";
 export {
     ReusableText,
     ReusableBtn,
@@ -14,5 +13,4 @@ export {
     NetworkImage,
     Rating,
     DescriptionText,
-    PopularList
 }
