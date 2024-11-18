@@ -50,7 +50,7 @@ const Places = () => {
          imageUrl:
            "https://www.shutterstock.com/image-photo/great-wall-china-massive-series-600nw-2490374633.jpg",
          region: "East Asia, China",
-       },
+       }
    ]
   return (
     <View>
@@ -58,7 +58,7 @@ const Places = () => {
       <VirtualizedList
       data={countries}
       horizontal
-      keyExtractor={(item) =>item._id}
+      keyExtractor={(item) => item._id}
       showsHorizontalScrollIndicator={false}
       getItemCount={(data) => data.length}
       getItem={(data,index) => data[index]}

@@ -1,17 +1,22 @@
-import { ScrollView,  Text, View } from 'react-native'
+import { ScrollView,  Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import AppBar from '../../components/Reusable/AppBar'
 import { COLORS, SIZES, TEXT } from '../../constants/theme'
 import styles from './hotelDetails.style'
-import { DescriptionText, HeightSpacer, NetworkImage, ReusableText } from '../../components'
+import { DescriptionText, HeightSpacer, HotelMap, NetworkImage, ReusableText, ReviewsList } from '../../components'
 import reusable from '../../components/Reusable/reusable.style'
 import {Rating} from 'react-native-stock-star-rating'
+import {Feather} from '@expo/vector-icons'
 
 const HotelDetails = ({navigation}) => {
   const hotel = {
     availability: {
       start: "2023-08-20T00:00:00.000Z",
       end: "2023-08-25T00:00:00.000Z",
+    },
+    coordinates: {
+      latitude: 37.7749,
+      longitude: -122.4194,
     },
     _id: "64c675793cfa5e847bcd5436",
     country_id: "64c62bfc65af9f8c969a8d04",
@@ -24,10 +29,7 @@ const HotelDetails = ({navigation}) => {
     rating: 4.8,
     review: "2312 Reviews",
     location: "San Francisco, CA",
-    coordinates: {
-      latitude: 37.7749,
-      longitude: -122.4194,
-    },
+
     price: 400,
     facilities: [
       {
@@ -35,10 +37,47 @@ const HotelDetails = ({navigation}) => {
         _id: "64c675793cfa5e847bcd5437",
       },
     ],
-    __v: 0,
+    __v: 1,
+    "reviews": [
+      {
+        "_id": "64c675793cfa5e847bcd54",
+        "review":
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mauris sit amet massa vitae tortor condimentum lacinia quis. Elit ut aliquam purus sit amet luctus. Nunc mi ipsum faucibus vitae aliquet. Et magnis dis parturient montes nascetur ridiculus mus mauris. Vel fringilla est ullamcorper eget nulla facilisi.",
+        "rating": 4.6,
+        "user": {
+          "_id": "64c675793cfa5e847bcd59",
+          "username": "John Doe",
+          "profile":
+            "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png",
+        },
+        "updatedAt": "2023-08-25",
+      },
+      {
+        "_id": "64c675793cfa5e847bcd56",
+        "review":
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mauris sit amet massa vitae tortor condimentum lacinia quis. Elit ut aliquam purus sit amet luctus. Nunc mi ipsum faucibus vitae aliquet. Et magnis dis parturient montes nascetur ridiculus mus mauris. Vel fringilla est ullamcorper eget nulla facilisi.",
+        "rating": 4.7,
+        "user": {
+          "_id": "64c675793cfa5e847bcd51",
+          "username": "Hena Doe",
+          "profile":
+            "https://icons.veryicon.com/png/o/miscellaneous/user-avatar/user-avatar-male-5.png",
+        },
+        "updatedAt": "2023-08-25",
+      },
+    ],
   };
+
+  let coordinates ={
+    id: hotel._id,
+    title: hotel.title,
+    latitude: hotel.coordinates.latitude,
+    longitude: hotel.coordinates.longitude,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01
+  }
   return (
-    <View>
+    <ScrollView>
       <View style={{ height: 80 }}>
         <AppBar
           top={40}
@@ -124,12 +163,31 @@ const HotelDetails = ({navigation}) => {
           <ReusableText
             text={hotel.location}
             family={"regular"}
-            size={SIZES.small+2}
+            size={SIZES.small + 2}
             color={COLORS.gray}
           />
+
+          <HotelMap coordinates={coordinates} />
+
+          <View style={reusable.rowWithSpace("space-between")}>
+            <ReusableText
+              text={'Reviews'}
+              family={"medium"}
+              size={SIZES.large}
+              color={COLORS.black}
+            />
+            <TouchableOpacity>
+              <Feather name='list' size={20}/>
+            </TouchableOpacity>
+          </View>
+
+          <HeightSpacer height={10} />
+
+          <ReviewsList reviews={hotel.reviews}/>
+
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
