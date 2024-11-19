@@ -10,6 +10,7 @@ import PlaceDetails from "./Details/PlaceDetails";
 import HotelDetails from "./Details/HotelDetails";
 import HotelList from "./Details/HotelList";
 import HotelSearch from "./search/HotelSearch";
+import SelectRoom from "./Details/SelectRoom";
 export {
     Onboarding,
     Home,
@@ -22,5 +23,6 @@ export {
     PlaceDetails,
     HotelDetails,
     HotelList,
-    HotelSearch
+    HotelSearch,
+    SelectRoom
 }
