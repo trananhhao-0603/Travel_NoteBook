@@ -1,12 +1,13 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, FlatList} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import reusable from '../../components/Reusable/reusable.style'
 import styles from './search.styles'
 import {Feather} from '@expo/vector-icons'
 import { COLORS } from '../../constants/theme'
+import ReusableTitle from '../../components/Reusable/ReusableTitle'
 
-const Search = () => {
+const Search = ({navigation}) => {
   const [searchKey, setSearchKey] = useState('')
   const [searchResult, setSearchResult] = useState([])
   const search =  [
@@ -72,6 +73,25 @@ const Search = () => {
           <Feather name="search" size={24} color={COLORS.white} />
         </TouchableOpacity>
       </View>
+
+      {search.length === 0 ? (
+        <View>
+          <Image
+            source={require("../../assets/images/search.png")}
+            style={styles.searchImage}
+          />
+        </View>
+      ) : (
+        <FlatList
+        data={search}
+        keyExtractor={(item)=> item._id}
+        renderItem={({item})=>(
+          <View style={styles.title}>
+            <ReusableTitle item={item} onPress={()=>navigation.navigate('PlaceDetails',item._id)}/>
+          </View>
+        )}
+        />
+      )}
     </SafeAreaView>
   );
 }

@@ -31,6 +31,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLORS.lightGreen
+    },
+    searchImage: {
+        resizeMode: 'contain',
+        width:'100%',
+        height: SIZES.height/1.3,
+        paddingHorizontal: 20
+    },
+    title: {
+        marginHorizontal: 12,
+        marginBottom: 10
     }
 })
 
