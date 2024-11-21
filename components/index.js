@@ -8,6 +8,8 @@ import DescriptionText from "./Reusable/DescriptionText";
 import HotelMap from "./Hotel/HotelMap";
 import ReviewsList from "./Hotel/ReviewsList";
 import ReviewTle from "./Tiles/Reviews/ReviewTle";
+import ProfileTile from "./Reusable/ProfileTile";
+import SettingTile from "./Tiles/Settings/SettingTile";
 export {
     ReusableText,
     ReusableBtn,
@@ -18,5 +20,6 @@ export {
     DescriptionText,
     HotelMap,
     ReviewsList,
-    ReviewTle
+    ReviewTle,
+    ProfileTile
 }

@@ -53,30 +53,37 @@ const HotelList = ({navigation}) => {
     }
 ]
   return (
-    <SafeAreaView style={{marginHorizontal: 20}}>
-      <View style={{height: 80}}>
-        <AppBar title={'Nearby Hotels'} color={COLORS.lightGreen} color1={COLORS.lightGreen} icon={'search1'}
-        onPress={() => navigation.goBack()}
-        onPress1={() => navigation.navigate('HotelSearch')}
-        top={20}
-        left={0}
-        right={0}
+    <SafeAreaView style={{ marginHorizontal: 20 }}>
+      <View style={{ height: 80 }}>
+        <AppBar
+          title={"Nearby Hotels"}
+          color={COLORS.lightGreen}
+          color1={COLORS.lightGreen}
+          icon={"search1"}
+          onPress={() => navigation.goBack()}
+          onPress1={() => navigation.navigate("HotelSearch")}
+          top={20}
+          left={0}
+          right={0}
         />
       </View>
 
-      <View style={{paddingTop: 10}}>
+      <View style={{ paddingTop: 10 }}>
         <FlatList
-        data={hotels}
-        keyExtractor={(item)=>item._id }
-        renderItem={({item})=> (
-          <View style={{marginBottom: 10}}>
-            <ReusableTitle item={item} onPress={()=> navigation.navigate('PlaceDetails',item._id)}/>
-          </View>
-        )}
+          data={hotels}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item }) => (
+            <View style={{ marginBottom: 10 }}>
+              <ReusableTitle
+                item={item}
+                onPress={() => navigation.navigate("PlaceDetails", item._id)}
+              />
+            </View>
+          )}
         />
       </View>
     </SafeAreaView>
-  )
+  );
 }
 
 export default HotelList

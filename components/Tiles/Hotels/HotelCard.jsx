@@ -23,7 +23,7 @@ const HotelCard = ({item,margin,onPress}) => {
                 <ReusableText
                 text= {item.title}
                 family={'medium'}
-                size={SIZES.medium}
+                size={SIZES.medium-2}
                 color={COLORS.black}
                 />
 
@@ -32,7 +32,7 @@ const HotelCard = ({item,margin,onPress}) => {
                 <ReusableText
                 text= {item.location}
                 family={'medium'}
-                size={SIZES.medium}
+                size={SIZES.medium-3}
                 color={COLORS.gray}
                 />
 
@@ -53,7 +53,7 @@ export default HotelCard
 
 const styles = StyleSheet.create({
     card: (margin) => ({
-        width: SIZES.width/2.2,
+        width: SIZES.width/2.2-4,
         height: 250,
         borderRadius: 16,
         backgroundColor: COLORS.lightWhite,
