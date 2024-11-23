@@ -10,7 +10,7 @@ import styles from './topTap.style'
 
 const Tab = createMaterialTopTabNavigator()
 
-const TopTab = () => {
+const TopTab = ({navigation}) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ backgroundColor: COLORS.lightWhite }}>
@@ -31,7 +31,7 @@ const TopTab = () => {
             color={COLORS.lightGreen}
             icon={"logout"}
             color1={COLORS.lightGreen}
-            onPress1={() => {}}
+            onPress={() => navigation.goBack()}
           />
 
           <View style={styles.profile}>

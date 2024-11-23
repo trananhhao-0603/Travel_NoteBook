@@ -1,10 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { AssetImage } from '../../components'
 
 const SelectRoom = () => {
   return (
     <View>
-      <Text>SelectRoom</Text>
+      <AssetImage
+      data={require('../../assets/images/checked.png')}
+      mode={'contain'}
+      width={300}
+      height={300}
+      />
     </View>
   )
 }
