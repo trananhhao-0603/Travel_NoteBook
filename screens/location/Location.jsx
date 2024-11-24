@@ -3,7 +3,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import {UserLocationContext} from '../../context/UserLocationContext'
 const Location = () => {
-  const [mapRegion, setmapRegion] = useState({});
+  const [mapRegion, setmapRegion] = useState({
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 0.0322,
+    longitudeDelta: 0.0421,
+  });
     const {location,setLocation} = useContext(UserLocationContext)
 
     useEffect(()=>{
