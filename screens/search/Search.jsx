@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import reusable from '../../components/Reusable/reusable.style'
 import styles from './search.styles'
-import {Feather} from '@expo/vector-icons'
+import {Feather,AntDesign} from '@expo/vector-icons'
 import { COLORS } from '../../constants/theme'
 import ReusableTitle from '../../components/Reusable/ReusableTitle'
 
@@ -60,6 +60,10 @@ const Search = ({navigation}) => {
   return (
     <SafeAreaView style={reusable.container}>
       <View style={styles.searchContainer}>
+        <TouchableOpacity style={styles.searchBtn} onPress={() => navigation.goBack()}>
+          <AntDesign name="left" size={24} color={COLORS.black} />
+        </TouchableOpacity>
+
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.input}
@@ -70,7 +74,7 @@ const Search = ({navigation}) => {
         </View>
 
         <TouchableOpacity style={styles.searchBtn}>
-          <Feather name="search" size={24} color={COLORS.white} />
+          <Feather name="search" size={24} color={COLORS.black} />
         </TouchableOpacity>
       </View>
 
@@ -83,13 +87,16 @@ const Search = ({navigation}) => {
         </View>
       ) : (
         <FlatList
-        data={search}
-        keyExtractor={(item)=> item._id}
-        renderItem={({item})=>(
-          <View style={styles.title}>
-            <ReusableTitle item={item} onPress={()=>navigation.navigate('PlaceDetails',item._id)}/>
-          </View>
-        )}
+          data={search}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item }) => (
+            <View style={styles.title}>
+              <ReusableTitle
+                item={item}
+                onPress={() => navigation.navigate("PlaceDetails", item._id)}
+              />
+            </View>
+          )}
         />
       )}
     </SafeAreaView>

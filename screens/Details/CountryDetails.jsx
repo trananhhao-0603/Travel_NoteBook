@@ -1,41 +1,21 @@
-import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import {DescriptionText, HeightSpacer, NetworkImage, ReusableBtn, ReusableText, } from '../../components/index'
 import AppBar from '../../components/Reusable/AppBar'
-import PopularList from '../../components/Country/PopularList'
+import PopularPlacesList from '../../components/PopularList/PopularPlacesList'
 import { COLORS,  SIZES,  TEXT } from '../../constants/theme'
 import reusable from '../../components/Reusable/reusable.style'
 import {Feather} from '@expo/vector-icons'
+import fetchCountry from '../../hook/fetchCountry'
 const CountryDetails = ({navigation}) => {
   const route = useRoute();
-  const {item} = route.params;
-  console.log(item);
-  const country = {
-    "_id": "64c62bfc65af9f8c969a8d04",
-    "country": "USA",
-    "description": "The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.",
-    "imageUrl": "https://i.natgeofe.com/k/5b396b5e-59e7-43a6-9448-708125549aa1/new-york-statue-of-liberty.jpg",
-    "popular": [
-        {
-            "_id": "64c631650298a05640539adc",
-            "title": "Walt Disney World",
-            "imageUrl": "https://i.natgeofe.com/k/5b396b5e-59e7-43a6-9448-708125549aa1/new-york-statue-of-liberty.jpg",
-            "rating": 4.7,
-            "review": "1204 Reviews",
-            "location": "Orlando, USA"
-        },
-        {
-            "_id": "64d062a3de20d7c932f1f70a",
-            "title": "Statue of Liberty",
-            "imageUrl": "https://i.natgeofe.com/k/5b396b5e-59e7-43a6-9448-708125549aa1/new-york-statue-of-liberty.jpg",
-            "rating": 4.8,
-            "review": "1452 Reviews",
-            "location": "Liberty Island, New York Harbor"
-        }
-    ],
-    "region": "North America, USA"
-}
+  const id = route.params;
+  const {country, isLoading, error, refetch} = fetchCountry(id)
+  if (isLoading) {
+    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
+  }
+
   return (
       <ScrollView >
         <View >
@@ -51,11 +31,12 @@ const CountryDetails = ({navigation}) => {
           left={10}
           right={10}
           title={country.country}
+          titleColor={COLORS.lightWhite}
           color={COLORS.lightGreen}
           icon={'search1'}
           color1={COLORS.lightGreen}
           onPress={() => navigation.goBack()}
-          onPress1={() => {}}
+          onPress1={() => navigation.navigate('Search')}
           />
         </View>
 
@@ -77,15 +58,15 @@ const CountryDetails = ({navigation}) => {
               color={COLORS.black}
               />
 
-              <TouchableOpacity onPress={()=> {}}>
+              {/* <TouchableOpacity onPress={()=> {}}>
                 <Feather
                 name='list'
                 size={20}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <HeightSpacer height={20}/>
-            <PopularList data={country.popular}/>
+            <PopularPlacesList data={country.popular}/>
 
             <HeightSpacer height={20}/> 
               <ReusableBtn  

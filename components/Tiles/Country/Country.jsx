@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 const Country = ({item}) => {
   const navigation = useNavigation()
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('CountryDetails', item)}>
+    <TouchableOpacity onPress={() => navigation.navigate('CountryDetails', item._id)}>
       <View>
 
         <NetworkImage source={item.imageUrl}
@@ -19,7 +19,7 @@ const Country = ({item}) => {
         <ReusableText
           text= {item.country}
           family={'medium'}
-          size={TEXT.large}
+          size={TEXT.small}
           color={COLORS.black}
           align={'center'}
           />

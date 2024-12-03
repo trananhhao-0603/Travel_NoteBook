@@ -11,6 +11,7 @@ import ReviewTle from "./Tiles/Reviews/ReviewTle";
 import ProfileTile from "./Reusable/ProfileTile";
 import SettingTile from "./Tiles/Settings/SettingTile";
 import AssetImage from "./Reusable/AssetImage";
+import Counter from "./Reusable/Counter";
 export {
     ReusableText,
     ReusableBtn,
@@ -24,5 +25,6 @@ export {
     ReviewTle,
     ProfileTile,
     SettingTile,
-    AssetImage
+    AssetImage,
+    Counter
 }

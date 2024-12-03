@@ -60,7 +60,7 @@ const HotelSearch = ({navigation}) => {
     <SafeAreaView>
       <View style={{height: 60}}>
       <AppBar
-          top={20}
+          top={0}
           left={10}
           right={10}
           title={'Look for hotels'}

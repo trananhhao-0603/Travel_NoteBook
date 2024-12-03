@@ -19,6 +19,7 @@ import Failed from "./bookings/Failed";
 import Successful from "./bookings/Successful";
 import Registration from "./authentication/Registration";
 import Singin from "./authentication/Singin";
+import SelectedRoom from "./Details/SelectedRoom";
 export {
     Onboarding,
     Home,
@@ -40,5 +41,6 @@ export {
     Failed,
     Successful,
     Registration,
-    Singin
+    Singin,
+    SelectedRoom
 }

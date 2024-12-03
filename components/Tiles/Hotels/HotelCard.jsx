@@ -17,13 +17,12 @@ const HotelCard = ({item,margin,onPress}) => {
                 />
             </View>
 
-            <HeightSpacer height={5}/>
 
             <View style={{padding:10}}>
                 <ReusableText
                 text= {item.title}
                 family={'medium'}
-                size={SIZES.medium-2}
+                size={SIZES.medium-1}
                 color={COLORS.black}
                 />
 
@@ -31,8 +30,8 @@ const HotelCard = ({item,margin,onPress}) => {
 
                 <ReusableText
                 text= {item.location}
-                family={'medium'}
-                size={SIZES.medium-3}
+                family={'regular'}
+                size={10}
                 color={COLORS.gray}
                 />
 
@@ -63,6 +62,6 @@ const styles = StyleSheet.create({
     imageContainer:{
         alignItems: 'center',
         marginTop:10,
-        height:150
+        height:120
     }
 })

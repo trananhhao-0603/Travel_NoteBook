@@ -10,7 +10,7 @@ const ReusableTitle = ({item, onPress}) => {
       <View style={reusable.rowWithSpace('flex-start')}>
         <NetworkImage source={item.imageUrl} width={80} height={80} raidus={12}/>
         <WidthSpacer width={15}/>
-        <View>
+        <View style={{paddingRight: 100}}>
             <ReusableText
             text= {item.title}
             family={'medium'}
@@ -23,7 +23,7 @@ const ReusableTitle = ({item, onPress}) => {
             <ReusableText
             text= {item.location}
             family={'medium'}
-            size={14}
+            size={10}
             color={COLORS.gray}
             />
 

@@ -1,49 +1,21 @@
-import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import {DescriptionText, HeightSpacer, NetworkImage, ReusableBtn, ReusableText, } from '../../components/index'
 import AppBar from '../../components/Reusable/AppBar'
-import PopularList from '../../components/Country/PopularList'
+import PopularHotelsList from '../../components/PopularList/PopularHotelsList'
 import { COLORS,  SIZES,  TEXT } from '../../constants/theme'
 import reusable from '../../components/Reusable/reusable.style'
 import {Feather} from '@expo/vector-icons'
+import fetchPlace from '../../hook/fetchPlace'
 
 const PlaceDetails = ({navigation}) => {
   const route = useRoute();
   const id = route.params
-  console.log(id);
-  
-  const place = {
-    "_id": "64d062a3de20d7c932f1f70a",
-    "country_id": "64c62bfc65af9f8c969a8d04",
-    "title": "Statue of Liberty",
-    "description": "The Statue of Liberty is an iconic symbol of freedom and democracy, located on Liberty Island in New York Harbor. This colossal statue was a gift from France to the United States and was dedicated in 1886. Standing at 305 feet tall, the statue represents Libertas, the Roman goddess of liberty, holding a torch and a tablet inscribed with the date of the American Declaration of Independence. The Statue of Liberty has welcomed countless immigrants to the USA, serving as a symbol of hope and opportunity.",
-    "contact_id": "64c5d95adc7efae2a45ec376",
-    "imageUrl": "https://agotourist.com/wp-content/uploads/2021/10/thanh-pho-da-lat-2.jpg",
-    "rating": 4.8,
-    "review": "1452 Reviews",
-    "latitude": 40.689247,
-    "longitude": -74.044502,
-    "location": "Liberty Island, New York Harbor",
-    "popular": [
-        {
-            "_id": "64c675be3cfa5e847bcd5439",
-            "title": "Family-Friendly Resort",
-            "imageUrl": "https://agotourist.com/wp-content/uploads/2021/10/thanh-pho-da-lat-2.jpg",
-            "rating": 4.6,
-            "review": "12854 Reviews",
-            "location": "Orlando, FL"
-        },
-        {
-            "_id": "64c675793cfa5e847bcd5436",
-            "title": "Urban Chic Boutique Hotel",
-            "imageUrl": "https://agotourist.com/wp-content/uploads/2021/10/thanh-pho-da-lat-2.jpg",
-            "rating": 4.8,
-            "review": "2312 Reviews",
-            "location": "San Francisco, CA"
-        }
-    ]
-}
+  const {place, isLoading, error, refetch} = fetchPlace(id)
+  if (isLoading) {
+    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
+  }
   return (
     <ScrollView>
       <View>
@@ -59,6 +31,7 @@ const PlaceDetails = ({navigation}) => {
           left={10}
           right={10}
           title={place.title}
+          titleColor={COLORS.lightWhite}
           color={COLORS.lightGreen}
           icon={"search1"}
           color1={COLORS.lightGreen}
@@ -85,12 +58,12 @@ const PlaceDetails = ({navigation}) => {
               color={COLORS.black}
             />
 
-            <TouchableOpacity onPress={() => {}}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate('HotelList')}>
               <Feather name="list" size={20} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <HeightSpacer height={20} />
-          <PopularList data={place.popular} />
+          <PopularHotelsList data={place.popular} />
 
           <HeightSpacer height={20} />
           <ReusableBtn

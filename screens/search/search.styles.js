@@ -10,14 +10,14 @@ const styles = StyleSheet.create({
         borderColor: COLORS.lightGreen,
         borderWidth: 1.5,
         borderRadius: SIZES.medium,
-        marginVertical: SIZES.medium,
+        marginBottom: 20,
         height: 50
     },
     input: {
         fontFamily:'regular',
         width:'100%',
         height:'100%',
-        paddingHorizontal: 50
+        paddingHorizontal: 25
     },
     searchWrapper: {
         flex: 1,

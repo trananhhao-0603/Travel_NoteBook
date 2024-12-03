@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from './screens/onboarding/Onboarding';
 import BottomTabNavigation from './navigation/BottomTabNavigation';
-import { Search, CountryDetails, Recommended, PlaceDetails, HotelDetails, HotelList, HotelSearch, SelectRoom, Payments, Settings } from './screens';
+import { Search, CountryDetails, Recommended, PlaceDetails, HotelDetails, HotelList, HotelSearch, SelectRoom, Payments, Settings, SelectedRoom, Successful, Failed } from './screens';
 import * as Location from 'expo-location'
 import {UserLocationContext} from './context/UserLocationContext'
 const Stack = createNativeStackNavigator();
@@ -105,6 +105,21 @@ export default function App() {
           <Stack.Screen
             name="Settings"
             component={Settings}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SelectedRoom"
+            component={SelectedRoom}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Successful"
+            component={Successful}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Failed"
+            component={Failed}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
