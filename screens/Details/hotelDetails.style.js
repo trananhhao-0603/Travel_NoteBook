@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     margin: 15,
     backgroundColor: COLORS.lightWhite,
-    height: 130,
+    height: 150,
     position:'absolute',
     top: 150,
     left: 0,

@@ -13,22 +13,22 @@ const Places = () => {
   }
   return (
     <View>
-      <HeightSpacer height={20}/>
+      <HeightSpacer height={20} />
       <VirtualizedList
-      data={countries}
-      horizontal
-      keyExtractor={(item) => item._id}
-      showsHorizontalScrollIndicator={false}
-      getItemCount={(data) => data.length}
-      getItem={(data,index) => data[index]}
-      renderItem={({item}) => (
-        <View style={{marginRight:SIZES.xSmall}}>
-            <Country item={item}/>
-        </View>
-      )}
+        data={countries}
+        horizontal
+        keyExtractor={(item) => item._id}
+        showsHorizontalScrollIndicator={false}
+        getItemCount={(data) => data.length}
+        getItem={(data, index) => data[index]}
+        renderItem={({ item, index }) => (
+          <View style={{ marginRight: SIZES.xSmall }} key={index}>
+            <Country item={item} />
+          </View>
+        )}
       />
     </View>
-  )
+  );
 }
 
 export default Places

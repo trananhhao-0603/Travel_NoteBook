@@ -1,10 +1,15 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import MapView, {Marker} from 'react-native-maps'
 const HotelMap = ({coordinates}) => {
+  if (coordinates === undefined){
+    return (
+      <ActivityIndicator />
+    )
+  }
   return (
     <TouchableOpacity onPress={() => {}}>
-        <MapView style={styles.maps} region={coordinates}>
+        <MapView style={styles.maps} initialRegion={coordinates}>
             <Marker 
             coordinate={coordinates} 
             title={coordinates.title}

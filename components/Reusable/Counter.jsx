@@ -21,7 +21,13 @@ const Counter = () => {
         name="minussquareo"
         size={26}
         color={COLORS.gray}
-        onPress={decrement}
+        onPress={()=> {
+          decrement();
+          
+          return (
+            count - 1
+          )
+        }}
       />
       <ReusableText
         text={`  ${count}  `}
@@ -33,7 +39,14 @@ const Counter = () => {
         name="plussquareo"
         size={26}
         color={COLORS.gray}
-        onPress={increment}
+        onPress={()=> {
+          increment()
+          console.log(count);
+          
+          return (
+            count + 1
+          )
+        }}
       />
     </View>
   );

@@ -66,7 +66,7 @@ const BottomTabNavigation = () => {
         }
         />
 
-        <Tab.Screen
+        {/* <Tab.Screen
         name='Chat'
         component={AuthTopTab}
         options={
@@ -83,7 +83,7 @@ const BottomTabNavigation = () => {
                 )
             }
         }
-        />
+        /> */}
 
         <Tab.Screen
         name='Profile'

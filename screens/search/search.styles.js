@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
         height: 50
     },
     input: {
-        fontFamily:'regular',
+        // fontFamily:'vietnamese2',
         width:'100%',
         height:'100%',
-        paddingHorizontal: 25
+        paddingHorizontal: 25,
     },
     searchWrapper: {
         flex: 1,

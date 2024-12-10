@@ -4,6 +4,7 @@ const reusable = StyleSheet.create({
     container: {
         flex: 1,
         marginHorizontal: 20,
+        marginTop:20
 
     },
     rowWithSpace: (justifyContent) => ({

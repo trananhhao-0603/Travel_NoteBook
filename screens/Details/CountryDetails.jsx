@@ -1,5 +1,5 @@
 import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useRoute } from '@react-navigation/native'
 import {DescriptionText, HeightSpacer, NetworkImage, ReusableBtn, ReusableText, } from '../../components/index'
 import AppBar from '../../components/Reusable/AppBar'
@@ -8,6 +8,7 @@ import { COLORS,  SIZES,  TEXT } from '../../constants/theme'
 import reusable from '../../components/Reusable/reusable.style'
 import {Feather} from '@expo/vector-icons'
 import fetchCountry from '../../hook/fetchCountry'
+import MiniMap from '../../components/Map/MiniMap'
 const CountryDetails = ({navigation}) => {
   const route = useRoute();
   const id = route.params;
@@ -17,73 +18,77 @@ const CountryDetails = ({navigation}) => {
   }
 
   return (
-      <ScrollView >
-        <View >
-          <NetworkImage 
-          source={country.imageUrl}
-          width={'100%'}
-          height={350}
-          raidus={0}
-          />
-
-          <AppBar
+    <>    
+    <AppBar
           top={40}
           left={10}
           right={10}
+          paddingRight={20}
           title={country.country}
           titleColor={COLORS.lightWhite}
           color={COLORS.lightGreen}
-          icon={'search1'}
+          icon={"search1"}
           color1={COLORS.lightGreen}
           onPress={() => navigation.goBack()}
-          onPress1={() => navigation.navigate('Search')}
-          />
-        </View>
+          onPress1={() => navigation.navigate("Search")}
+          
+        />
+    <ScrollView style={{marginTop: -30}}>
+      
+      <View>
+        <NetworkImage
+          source={country.imageUrl}
+          width={"100%"}
+          height={350}
+          raidus={0}
+        />
+      </View>
 
-        <View style={styles.description}>
-          <ReusableText
-            text= {country.region}
-            family={'medium'}
-            size={TEXT.xLarge}
-            color={COLORS.black}
-            />
+      <View style={styles.description}>
+        <ReusableText
+          text={country.region}
+          family={"medium"}
+          size={TEXT.xLarge}
+          color={COLORS.black}
+        />
 
-          <DescriptionText text={country.description}/>
-          <View style={{alignContent: 'center'}}>
-            <View style={reusable.rowWithSpace('space-between')}>
-              <ReusableText
-              text= {'Popular Destinations'}
-              family={'medium'}
+        <DescriptionText text={country.description} />
+        <View style={{ alignContent: "center" }}>
+          <View style={reusable.rowWithSpace("space-between")}>
+            <ReusableText
+              text={"Popular Destinations"}
+              family={"medium"}
               size={TEXT.xLarge}
               color={COLORS.black}
-              />
+            />
 
-              {/* <TouchableOpacity onPress={()=> {}}>
+            {/* <TouchableOpacity onPress={()=> {}}>
                 <Feather
                 name='list'
                 size={20}
                 />
               </TouchableOpacity> */}
-            </View>
-            <HeightSpacer height={20}/>
-            <PopularPlacesList data={country.popular}/>
-
-            <HeightSpacer height={20}/> 
-              <ReusableBtn  
-                onPress={()=> navigation.navigate('HotelSearch')}
-                btnText={"Find Best Hotels"}
-                width={SIZES.width-40}
-                backgroundColor={COLORS.green}
-                borderColor={COLORS.green}
-                borderWidth={0}
-                textColor={COLORS.white}
-                />
-              <HeightSpacer height={20}/>           
           </View>
+          <HeightSpacer height={20} />
+
+          <PopularPlacesList data={country.popular} />
+
+          <HeightSpacer height={20} />
+          <ReusableBtn
+            onPress={() => navigation.navigate("HotelSearch")}
+            btnText={"Find Best Hotels"}
+            width={SIZES.width - 40}
+            backgroundColor={COLORS.green}
+            borderColor={COLORS.green}
+            borderWidth={0}
+            textColor={COLORS.white}
+          />
+          <HeightSpacer height={20} />
         </View>
-      </ScrollView>
-      
-  )
+      </View>
+    </ScrollView>
+    </>
+  );
 }
 
 export default CountryDetails

@@ -1,14 +1,74 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React  from 'react'
-import { useRoute } from '@react-navigation/native'
+import { ActivityIndicator, Alert, StyleSheet, Text, View } from 'react-native'
+import React,{useState}  from 'react'
+import { useRoute} from '@react-navigation/native'
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
 import reusable from '../../components/Reusable/reusable.style';
-import { AssetImage, Counter, HeightSpacer, NetworkImage, Rating, ReusableBtn, ReusableText, WidthSpacer } from '../../components';
+import {AntDesign} from '@expo/vector-icons'
+import { AssetImage, HeightSpacer, NetworkImage, Rating, ReusableBtn, ReusableText, WidthSpacer } from '../../components';
+import checkUser from '../../hook/checkUser';
+import ip from '../../hook/ip_address'
 const SelectedRoom = ({navigation}) => {
+
+  const {userLogin,userData ,isLoading, time, token}  = checkUser()
+  if (isLoading) {
+    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
+  }
     const router = useRoute();
-    const {item} = router.params
-    console.log(item)
+    const {item, id} = router.params
+    // console.log(item)
+    // console.log(id);
+    
+    const [count, setCount] = useState(0);
+    const increment = () => {
+        setCount(count + 1);
+    }
+
+    const decrement = () => {
+        if (count > 0) {
+          setCount(count - 1);
+        }
+    }
+
+    const handleBooking = async () => {
+      if (count === 0) {
+        Alert.alert('Error', 'Please select the number of days for your stay.');
+        return;
+      }
+      let daystay = count
+      const bookingData = {
+        user_id: userData._id, 
+        hotel_id: id,
+        room_id: item._id, 
+        daystay: daystay,
+      };
+      
+  
+      try {
+        const response = await fetch('http://'+ip+':5003/api/bookings', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(bookingData),
+        });
+  
+        const result = await response.json();
+        console.log(result);
+        
+  
+        if (response.ok) {
+          navigation.navigate('Successful',{item, count })
+          
+        } else {
+          Alert.alert('Error', result.error || 'Failed to create booking.');
+        }
+      } catch (error) {
+        console.error(error);
+        Alert.alert('Error', 'An unexpected error occurred.');
+      }
+    };
   return (
     <View>
       <View style={{ height: 100 }}>
@@ -57,13 +117,6 @@ const SelectedRoom = ({navigation}) => {
 
             <HeightSpacer height={10} />
 
-            <ReusableText
-              text={item.location}
-              family={"medium"}
-              size={SIZES.medium}
-              color={COLORS.gray}
-            />
-
             <View
               style={{
                 borderWidth: 0.5,
@@ -89,7 +142,7 @@ const SelectedRoom = ({navigation}) => {
               />
 
               <ReusableText
-                text={"$ 400"}
+                text={`$${item.price}`}
                 family={"regular"}
                 size={SIZES.medium}
                 color={COLORS.black}
@@ -108,10 +161,10 @@ const SelectedRoom = ({navigation}) => {
 
               <View style={reusable.rowWithSpace("flex-start")}>
                 <AssetImage
-                data={require('../../assets/images/Visa.png')}
-                mode={'contain'}
-                width={30}
-                height={20}
+                  data={require("../../assets/images/Visa.png")}
+                  mode={"contain"}
+                  width={30}
+                  height={20}
                 />
                 <ReusableText
                   text={"Visa"}
@@ -125,17 +178,65 @@ const SelectedRoom = ({navigation}) => {
 
             <View style={reusable.rowWithSpace("space-between")}>
               <ReusableText
-                text={"4 Guests"}
+                text={"Days stay"}
                 family={"regular"}
                 size={SIZES.medium}
                 color={COLORS.black}
               />
-              <Counter />
+              <View style={reusable.rowWithSpace("flex-start")}>
+                <AntDesign
+                  name="minussquareo"
+                  size={26}
+                  color={COLORS.gray}
+                  onPress={() => {
+                    decrement();
+                  }}
+                />
+                <ReusableText
+                  text={`  ${count}  `}
+                  family={"regular"}
+                  size={SIZES.medium}
+                  color={COLORS.black}
+                />
+                <AntDesign
+                  name="plussquareo"
+                  size={26}
+                  color={COLORS.gray}
+                  onPress={() => {
+                    increment();
+                  }}
+                />
+              </View>
+            </View>
+
+            <View
+              style={{
+                borderWidth: 0.5,
+                borderColor: COLORS.lightGrey,
+                marginVertical: 15,
+              }}
+            ></View>
+
+            <View style={reusable.rowWithSpace("space-between")}>
+              <ReusableText
+                text={"Total"}
+                family={"bold"}
+                size={SIZES.xLarge}
+                color={COLORS.black}
+              />
+              <View style={reusable.rowWithSpace("flex-start")}>
+                <ReusableText
+                  text={`  $${count * item.price}  `}
+                  family={"regular"}
+                  size={SIZES.medium}
+                  color={COLORS.black}
+                />
+              </View>
             </View>
             <HeightSpacer height={30} />
 
             <ReusableBtn
-              onPress={() => navigation.navigate("Successful")}
+              onPress={handleBooking}
               btnText={"Book Now"}
               width={SIZES.width - 60}
               backgroundColor={COLORS.green}

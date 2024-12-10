@@ -1,4 +1,4 @@
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, {useState} from 'react'
 import styles from './singin.style'
 import {Formik} from 'formik'
@@ -6,10 +6,18 @@ import * as Yup from 'yup'
 import { COLORS, SIZES } from '../../constants/theme'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import {WidthSpacer,HeightSpacer, ReusableBtn} from '../../components/index'
+import ip from '../../hook/ip_address'
+import axios from 'axios'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
-  .min(8, 'Password must be at least 8 characters')
+  .min(8, 'Password must be at least 8 characters. Example: Anhhao@0603')
+  .matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character'
+  )
   .required('Required'),
   email: Yup.string()
   .email('Provided a valid email address')
@@ -17,18 +25,72 @@ const validationSchema = Yup.object().shape({
 
 })
 
-const Singin = () => {
+const Singin = ({navigation}) => {
   const [loader, setLoader] = useState(false)
-  const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
+  const errorLogin = () => {
+    Alert.alert('Login failed', 'PLease fill in all required fields', [
+      {
+        text: 'Cancel',
+        onPress: ()=> {}      
+      },
+      {defaultIndex: 1}
+    ])
+  }
+
+  const login = async (values) => {
+    setLoader(true);
+
+    try {
+      const endpoint = 'http://'+ip+':5003/api/login';
+      const data = values;
+
+      const response = await axios.post(endpoint, data);
+      if (response.status === 200) {
+        setLoader(false);
+        await AsyncStorage.setItem("id", JSON.stringify(response.data.id));
+        await AsyncStorage.setItem("token", JSON.stringify(response.data.token));
+        const userId = response.data.id;
+        navigation.replace("Bottom", { id: userId }); // Truyền ID qua navigation
+      } else {
+        Alert.alert("Error Logging in ", "Incorrect Email/Password", [
+          {
+            text: "Cancel",
+            onPress: () => {},
+          },
+          {
+            text: "Continue",
+            onPress: () => {},
+          },
+          { defaultIndex: 1 },
+        ]);
+      }
+    } catch (error) {
+      console.log(error);
+      
+      Alert.alert(
+        "Error ",
+        "Oops, Something went wrong",
+        [
+          {
+            text: "Cancel",
+            onPress: () => {},
+          },
+          { defaultIndex: 1 },
+        ]
+      );
+    } finally {
+      setLoader(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={(value) => {
-          console.log(value)         
+        onSubmit={(values) => {
+          login(values)    
         }}
       >
         {({
@@ -121,7 +183,7 @@ const Singin = () => {
             <HeightSpacer height={20}/>
 
             <ReusableBtn
-            onPress={handleSubmit}
+            onPress={isValid ? handleSubmit : errorLogin}
             btnText={"SIGN IN"}
             width={SIZES.width - 40}
             backgroundColor={COLORS.green}

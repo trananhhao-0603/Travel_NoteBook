@@ -8,6 +8,7 @@ import BottomTabNavigation from './navigation/BottomTabNavigation';
 import { Search, CountryDetails, Recommended, PlaceDetails, HotelDetails, HotelList, HotelSearch, SelectRoom, Payments, Settings, SelectedRoom, Successful, Failed } from './screens';
 import * as Location from 'expo-location'
 import {UserLocationContext} from './context/UserLocationContext'
+import AuthTopTab from './navigation/AuthTopTab';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -18,6 +19,8 @@ export default function App() {
     bold: require('./assets/fonts/bold.otf'),
     light: require('./assets/fonts/light.otf'),
     xtrabold: require('./assets/fonts/xtrabold.otf'),
+    vietnamese: require('./assets/fonts/vietnamese.ttf'),
+    vietnamese2: require('./assets/fonts/vietnamese2.ttf'),
   });
   useEffect(() => {
     (async () => {
@@ -120,6 +123,11 @@ export default function App() {
           <Stack.Screen
             name="Failed"
             component={Failed}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Auth"
+            component={AuthTopTab}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

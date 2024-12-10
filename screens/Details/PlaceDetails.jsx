@@ -8,16 +8,31 @@ import { COLORS,  SIZES,  TEXT } from '../../constants/theme'
 import reusable from '../../components/Reusable/reusable.style'
 import {Feather} from '@expo/vector-icons'
 import fetchPlace from '../../hook/fetchPlace'
+import MiniMap from '../../components/Map/MiniMap'
 
 const PlaceDetails = ({navigation}) => {
   const route = useRoute();
   const id = route.params
-  const {place, isLoading, error, refetch} = fetchPlace(id)
+  const {place, isLoading, coordinates,error, refetch} = fetchPlace(id)
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
   }
   return (
-    <ScrollView>
+    <>
+    <AppBar
+          top={40}
+          left={10}
+          right={10}
+          paddingRight={20}
+          title={place.title}
+          titleColor={COLORS.lightWhite}
+          color={COLORS.lightGreen}
+          icon={"search1"}
+          color1={COLORS.lightGreen}
+          onPress={() => navigation.goBack()}
+          onPress1={() => navigation.navigate('Search')}
+        />
+    <ScrollView style={{marginTop: -30}}>
       <View>
         <NetworkImage
           source={place.imageUrl}
@@ -26,18 +41,7 @@ const PlaceDetails = ({navigation}) => {
           raidus={0}
         />
 
-        <AppBar
-          top={40}
-          left={10}
-          right={10}
-          title={place.title}
-          titleColor={COLORS.lightWhite}
-          color={COLORS.lightGreen}
-          icon={"search1"}
-          color1={COLORS.lightGreen}
-          onPress={() => navigation.goBack()}
-          onPress1={() => {}}
-        />
+        
       </View>
 
       <View style={styles.description}>
@@ -62,6 +66,11 @@ const PlaceDetails = ({navigation}) => {
               <Feather name="list" size={20} />
             </TouchableOpacity> */}
           </View>
+
+          <HeightSpacer height={20} />
+
+          <MiniMap coordinates={coordinates}/>
+
           <HeightSpacer height={20} />
           <PopularHotelsList data={place.popular} />
 
@@ -79,6 +88,7 @@ const PlaceDetails = ({navigation}) => {
         </View>
       </View>
     </ScrollView>
+    </>
   );
 }
 

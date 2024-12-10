@@ -6,8 +6,8 @@ const Location = () => {
   const [mapRegion, setmapRegion] = useState({
     latitude: 0,
     longitude: 0,
-    latitudeDelta: 0.0322,
-    longitudeDelta: 0.0421,
+    latitudeDelta: 0.0522,
+    longitudeDelta: 0.0621,
   });
     const {location,setLocation} = useContext(UserLocationContext)
 
@@ -16,8 +16,8 @@ const Location = () => {
             setmapRegion({
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
-                latitudeDelta: 0.0322,
-                longitudeDelta: 0.0421
+                latitudeDelta: 0.0522,
+                longitudeDelta: 0.0621
             })
         }
     },[location])
@@ -39,7 +39,9 @@ export default Location
 
 const styles = StyleSheet.create({
   mapStyle: {
-    ...StyleSheet.absoluteFillObject
+    ...StyleSheet.absoluteFillObject,
+    marginTop: 10,
+    
   }
   
 })

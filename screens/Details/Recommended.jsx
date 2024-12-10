@@ -9,19 +9,23 @@ const Recommended = ({navigation}) => {
   const {recommendations, isLoading, error, refetch} = fetchRecommendations()
   
   return (
-    <SafeAreaView style={{ marginHorizontal: 20 }}>
-      <View style={{ height: 70 }}>
-        <AppBar
+    <>
+    <AppBar
           title={"Recommendations"}
           color={COLORS.lightGreen}
           color1={COLORS.lightGreen}
           icon={"search1"}
           onPress={() => navigation.goBack()}
           onPress1={() => navigation.navigate("Search")}
-          top={0}
-          left={0}
+          top={40}
+          left={20}
           right={0}
+          paddingRight={40}
         />
+  
+    <SafeAreaView style={{ marginHorizontal: 20 }}>
+      <View style={{ height: 70 }}>
+        
       </View>
 
       {isLoading ? (
@@ -43,6 +47,7 @@ const Recommended = ({navigation}) => {
         </View>
       )}
     </SafeAreaView>
+    </>
   );
 }
 

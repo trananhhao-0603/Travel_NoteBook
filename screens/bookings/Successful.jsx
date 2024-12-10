@@ -3,16 +3,12 @@ import React from 'react'
 import { AssetImage, HeightSpacer, ReusableBtn, ReusableText } from '../../components'
 import { COLORS, SIZES, TEXT } from '../../constants/theme'
 import ReusableTitle from '../../components/Reusable/ReusableTitle'
+import RoomDetailTile from '../../components/Reusable/RoomDetailTile'
+import { useRoute } from '@react-navigation/native'
 const Successful = ({navigation}) => {
-    const hotel ={
-        "_id": "64c674d23cfa5e847bcd5430",
-        "country_id": "64c62bfc65af9f8c969a8d04",
-        "title": "Seaside Resort",
-        "imageUrl": "https://lh6.googleusercontent.com/proxy/gqbKG_s6ECx8nCvAW2vR_YuvU0GUOAA_KYFayI2FULUXFI4YPNpo46Br7ToQvEkjB95OtAO_f_D12yhMfQWMax_IlCF3dZaBJ8AsvB2e8l48",
-        "rating": 4.9,
-        "review": "1204 Reviews",
-        "location": "Miami Beach, FL"
-    }
+  const route = useRoute();
+  const {item, count} = route.params
+  
   return (
     <View>
       <View style={{ marginTop: "40%" }}>
@@ -53,7 +49,7 @@ const Successful = ({navigation}) => {
 
           <HeightSpacer height={20}/>
 
-          <ReusableTitle item={hotel}/>
+          <RoomDetailTile item={item} item1={count} />
 
           <HeightSpacer height={40}/>
 
