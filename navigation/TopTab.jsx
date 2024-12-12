@@ -13,6 +13,8 @@ const Tab = createMaterialTopTabNavigator()
 
 const TopTab = ({navigation}) => {
   const {userLogin,userData ,isLoading, time}  = checkUser()
+  
+  
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
   }
@@ -77,7 +79,11 @@ const TopTab = ({navigation}) => {
 
               <View style={{ alignItems: "center" }}>
                 <ReusableText
-                  text={userLogin ? `${userData.email}` : `${time} trananhhao@gmail.com!`}
+                  text={
+                    userLogin
+                      ? `${userData.email}`
+                      : `${time} trananhhao@gmail.com!`
+                  }
                   family={"regular"}
                   size={SIZES.medium}
                   color={COLORS.white}
@@ -87,7 +93,15 @@ const TopTab = ({navigation}) => {
           </View>
         </View>
         <Tab.Navigator>
-          <Tab.Screen name="Bookings" component={TopBookings} />
+          <Tab.Screen
+            name="Bookings"
+            component={TopBookings}
+            listeners={({ navigation }) => ({
+              tabPress: () => {
+                navigation.navigate("Bookings", { key: Math.random() }); // Thay đổi key để buộc reload
+              },
+            })}
+          />
           <Tab.Screen name="Info" component={TopInfo} />
         </Tab.Navigator>
       </View>

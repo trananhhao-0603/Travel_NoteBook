@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     image: {
         resizeMode:'cover',
         width: SIZES.width,
-        height:SIZES.height
+        height:SIZES.height+50
     },
     stack: {
         position:'absolute',

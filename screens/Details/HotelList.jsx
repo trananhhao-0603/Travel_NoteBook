@@ -26,7 +26,7 @@ const HotelList = ({navigation}) => {
           paddingRight={40}
         />
     <SafeAreaView style={{ marginHorizontal: 20, marginBottom: 150 }}>
-      <View style={{ height: 70 }}>
+      <View style={{ height: 40 }}>
         
       </View>
 

@@ -2,7 +2,7 @@ import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import React from 'react'
 import MapView, {Marker} from 'react-native-maps'
 
-const MiniMap = ({coordinates}) => {
+const MiniMap = ({coordinates,placeCoordinates}) => {
     if (coordinates === undefined){
         return (
           <ActivityIndicator />

@@ -1,18 +1,19 @@
-import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React, { Fragment } from 'react'
+import { View, StyleSheet, ScrollView,  ActivityIndicator } from 'react-native'
+import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import {DescriptionText, HeightSpacer, NetworkImage, ReusableBtn, ReusableText, } from '../../components/index'
 import AppBar from '../../components/Reusable/AppBar'
 import PopularPlacesList from '../../components/PopularList/PopularPlacesList'
 import { COLORS,  SIZES,  TEXT } from '../../constants/theme'
 import reusable from '../../components/Reusable/reusable.style'
-import {Feather} from '@expo/vector-icons'
 import fetchCountry from '../../hook/fetchCountry'
-import MiniMap from '../../components/Map/MiniMap'
+import fetchPlaceByCountry from '../../hook/fetchPlacesByCountry'
+import CountryMiniMap from '../../components/Map/CountryMiniMap'
 const CountryDetails = ({navigation}) => {
   const route = useRoute();
   const id = route.params;
   const {country, isLoading, error, refetch} = fetchCountry(id)
+  const {place,coordinates, isLoading1, error1, refetch1} = fetchPlaceByCountry(id)
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
   }
@@ -69,6 +70,9 @@ const CountryDetails = ({navigation}) => {
                 />
               </TouchableOpacity> */}
           </View>
+          <HeightSpacer height={20} />
+
+          <CountryMiniMap placeCoordinates={coordinates}/>
           <HeightSpacer height={20} />
 
           <PopularPlacesList data={country.popular} />

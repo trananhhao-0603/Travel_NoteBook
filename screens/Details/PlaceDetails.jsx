@@ -14,80 +14,81 @@ const PlaceDetails = ({navigation}) => {
   const route = useRoute();
   const id = route.params
   const {place, isLoading, coordinates,error, refetch} = fetchPlace(id)
+  
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
   }
   return (
     <>
-    <AppBar
-          top={40}
-          left={10}
-          right={10}
-          paddingRight={20}
-          title={place.title}
-          titleColor={COLORS.lightWhite}
-          color={COLORS.lightGreen}
-          icon={"search1"}
-          color1={COLORS.lightGreen}
-          onPress={() => navigation.goBack()}
-          onPress1={() => navigation.navigate('Search')}
-        />
-    <ScrollView style={{marginTop: -30}}>
-      <View>
-        <NetworkImage
-          source={place.imageUrl}
-          width={"100%"}
-          height={350}
-          raidus={0}
-        />
+      <AppBar
+        top={40}
+        left={10}
+        right={10}
+        paddingRight={20}
+        title={place.title}
+        titleColor={COLORS.lightWhite}
+        color={COLORS.lightGreen}
+        icon={"search1"}
+        color1={COLORS.lightGreen}
+        onPress={() => navigation.goBack()}
+        onPress1={() => navigation.navigate("Search")}
+      />
+      <ScrollView style={{ marginTop: -30 }}>
+        <View>
+          <NetworkImage
+            source={place.imageUrl}
+            width={"100%"}
+            height={350}
+            raidus={0}
+          />
+        </View>
 
-        
-      </View>
+        <View style={styles.description}>
+          <ReusableText
+            text={place.location}
+            family={"medium"}
+            size={TEXT.xLarge}
+            color={COLORS.black}
+          />
 
-      <View style={styles.description}>
-        <ReusableText
-          text={place.location}
-          family={"medium"}
-          size={TEXT.xLarge}
-          color={COLORS.black}
-        />
+          <DescriptionText text={place.description} />
 
-        <DescriptionText text={place.description} />
-        <View style={{ alignContent: "center" }}>
-          <View style={reusable.rowWithSpace("space-between")}>
-            <ReusableText
-              text={"Popular Hotels"}
-              family={"medium"}
-              size={TEXT.xLarge}
-              color={COLORS.black}
-            />
+          <HeightSpacer height={20} />
 
-            {/* <TouchableOpacity onPress={() => navigation.navigate('HotelList')}>
+          <MiniMap coordinates={coordinates} />
+
+          <HeightSpacer height={20} />
+          <View style={{ alignContent: "center" }}>
+            <View style={reusable.rowWithSpace("space-between")}>
+              <ReusableText
+                text={"Popular Hotels"}
+                family={"medium"}
+                size={TEXT.xLarge}
+                color={COLORS.black}
+              />
+
+              {/* <TouchableOpacity onPress={() => navigation.navigate('HotelList')}>
               <Feather name="list" size={20} />
             </TouchableOpacity> */}
+            </View>
+
+            <HeightSpacer height={20} />
+            <PopularHotelsList data={place.popular} />
+
+            <HeightSpacer height={20} />
+            <ReusableBtn
+              onPress={() => navigation.navigate("HotelSearch")}
+              btnText={"Find Best Hotels"}
+              width={SIZES.width - 40}
+              backgroundColor={COLORS.green}
+              borderColor={COLORS.green}
+              borderWidth={0}
+              textColor={COLORS.white}
+            />
+            <HeightSpacer height={20} />
           </View>
-
-          <HeightSpacer height={20} />
-
-          <MiniMap coordinates={coordinates}/>
-
-          <HeightSpacer height={20} />
-          <PopularHotelsList data={place.popular} />
-
-          <HeightSpacer height={20} />
-          <ReusableBtn
-            onPress={() => navigation.navigate("HotelSearch")}
-            btnText={"Find Best Hotels"}
-            width={SIZES.width - 40}
-            backgroundColor={COLORS.green}
-            borderColor={COLORS.green}
-            borderWidth={0}
-            textColor={COLORS.white}
-          />
-          <HeightSpacer height={20} />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
     </>
   );
 }

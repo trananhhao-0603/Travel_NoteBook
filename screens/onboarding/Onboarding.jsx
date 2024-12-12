@@ -1,6 +1,7 @@
-import { FlatList, StyleSheet} from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet} from 'react-native'
 import React from 'react'
 import  Slides  from '../../components/Onboard/Slides'
+import { SIZES } from '../../constants/theme'
 const Onboarding = () => {
   const slides = [
     {
@@ -18,15 +19,17 @@ const Onboarding = () => {
     },
   ]
   return (
-    <FlatList
-      pagingEnabled
-      horizontal
-      showsVerticalScrollIndicator = {false}
-      data={slides}
-      keyExtractor={(item) => item.id}
-      renderItem={({item}) => <Slides item={item}/>}
-    />
-  )
+    <SafeAreaView>
+      <FlatList
+        pagingEnabled
+        horizontal
+        showsVerticalScrollIndicator={false}
+        data={slides}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <Slides item={item} />}
+      />
+    </SafeAreaView>
+  );
 }
 
 export default Onboarding

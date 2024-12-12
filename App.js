@@ -7,8 +7,9 @@ import Onboarding from './screens/onboarding/Onboarding';
 import BottomTabNavigation from './navigation/BottomTabNavigation';
 import { Search, CountryDetails, Recommended, PlaceDetails, HotelDetails, HotelList, HotelSearch, SelectRoom, Payments, Settings, SelectedRoom, Successful, Failed } from './screens';
 import * as Location from 'expo-location'
-import {UserLocationContext} from './context/UserLocationContext'
+import {UserLocationProvider} from './context/UserLocationContext'
 import AuthTopTab from './navigation/AuthTopTab';
+import BookingDetails from './screens/Details/BookingDetails';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -22,18 +23,6 @@ export default function App() {
     vietnamese: require('./assets/fonts/vietnamese.ttf'),
     vietnamese2: require('./assets/fonts/vietnamese2.ttf'),
   });
-  useEffect(() => {
-    (async () => {
-      
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
 
   const onLayoutRootView = useCallback(async ()=> {
     if (fontsLoaded) {
@@ -47,7 +36,7 @@ export default function App() {
 
   
   return (
-    <UserLocationContext.Provider value={{location,setLocation}}>
+    <UserLocationProvider>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -130,9 +119,14 @@ export default function App() {
             component={AuthTopTab}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="BookingDetails"
+            component={BookingDetails}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
-    </UserLocationContext.Provider>
+    </UserLocationProvider>
   );
 }
 

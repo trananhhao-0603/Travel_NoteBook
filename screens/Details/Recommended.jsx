@@ -23,8 +23,8 @@ const Recommended = ({navigation}) => {
           paddingRight={40}
         />
   
-    <SafeAreaView style={{ marginHorizontal: 20 }}>
-      <View style={{ height: 70 }}>
+    <SafeAreaView style={{ marginHorizontal: 20 ,marginBottom: 30}}>
+      <View style={{ height: 40 }}>
         
       </View>
 

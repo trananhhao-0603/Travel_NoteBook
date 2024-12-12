@@ -33,7 +33,7 @@ const HotelDetails = ({navigation}) => {
           icon={"search1"}
           color1={COLORS.lightGreen}
           onPress={() => navigation.goBack()}
-          onPress1={() => {}}
+          onPress1={() => navigation.navigate('HotelSearch')}
         />
     <ScrollView>
       <HeightSpacer height={30}/>
@@ -114,7 +114,7 @@ const HotelDetails = ({navigation}) => {
 
           <HotelMap coordinates={coordinates} />
 
-          <View style={reusable.rowWithSpace("space-between")}>
+          {/* <View style={reusable.rowWithSpace("space-between")}>
             <ReusableText
               text={"Reviews"}
               family={"medium"}
@@ -128,7 +128,7 @@ const HotelDetails = ({navigation}) => {
 
           <HeightSpacer height={10} />
 
-          <ReviewsList reviews={hotel.reviews} />
+          <ReviewsList reviews={hotel.reviews} /> */}
         </View>
         <View style={[reusable.rowWithSpace("space-between"), styles.bottom]}>
           <View>
