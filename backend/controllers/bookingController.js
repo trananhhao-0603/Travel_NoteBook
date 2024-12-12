@@ -74,5 +74,26 @@ module.exports = {
         } catch (error) {
             return next(error)
         }
-    }
+    },
+    deleteBooking: async (req, res, next) => {
+        const { user_id, hotel_id } = req.body;
+        try {
+            // Tìm kiếm booking theo user_id và hotel_id
+            const booking = await Booking.findOne({ user_id, hotel_id });
+
+            if (!booking) {
+                return res.status(404).json({ error: "Booking not found" });
+            }
+
+            // Xóa booking
+            await Booking.deleteOne({ _id: booking._id });
+
+            return res.status(200).json({
+                message: "Booking deleted successfully",
+            });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "An error occurred while deleting the booking" });
+        }
+    },
 };

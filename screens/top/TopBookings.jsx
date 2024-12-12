@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ReusableTitle from '../../components/Reusable/ReusableTitle'
 import { COLORS, SIZES } from '../../constants/theme'
@@ -6,8 +6,10 @@ import reusable from '../../components/Reusable/reusable.style'
 import fetchBooking from '../../hook/fetchBooking'
 import { ReusableBtn } from '../../components'
 import { useIsFocused } from '@react-navigation/native'
+import axios from 'axios'
+import ip from '../../hook/ip_address'
 const TopBookings = ({navigation}) => {
-  const { booking, isLoading, error, refetch } = fetchBooking()
+  const { booking, isLoading, error, token,refetch } = fetchBooking()
   const [showLoading, setShowLoading] = useState(true);
   const isFocused = useIsFocused();
   useEffect(() => {
@@ -16,12 +18,34 @@ const TopBookings = ({navigation}) => {
       setShowLoading(true);
       const timer = setTimeout(() => {
         setShowLoading(false);
-      }, 1000);
+      }, 500);
 
       // Dọn dẹp timer khi component unmount hoặc mất focus
       return () => clearTimeout(timer);
     }
   }, [isFocused]);
+
+  const handleDeleteBooking = async (userId, hotelId, token) => {
+
+    try {
+      const response = await axios.delete("http://"+ip+":5003/api/bookings", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          user_id: userId,
+          hotel_id: hotelId,
+        },
+      });
+      Alert.alert('Successful!',response.data.message);
+      refetch()
+    } catch (error) {
+      console.error(
+        "Failed to delete booking:",
+        error.response?.data || error.message
+      );
+    }
+  };
 
   if (showLoading || isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;
@@ -59,7 +83,18 @@ const TopBookings = ({navigation}) => {
               />
 
               <ReusableBtn
-                onPress={() => navigation.navigate("SelectedRoom", { item })}
+                onPress={() => {
+                          Alert.alert("Confirm", "Are you sure cancel this booking?", [
+                            {
+                              text: "Cancel",
+                              onPress: () => {},
+                            },
+                            {
+                              text: "Yes",
+                              onPress: () => {handleDeleteBooking(item.user_id,item.hotel_id,token)},
+                            },
+                          ]);
+                        }}
                 btnText={"Cancel"}
                 width={(SIZES.width - 50) / 2.3}
                 backgroundColor={COLORS.red}
