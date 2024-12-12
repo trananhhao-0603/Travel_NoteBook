@@ -6,43 +6,31 @@ This is our Travel NoteBook App.
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-2. [Project Structure](#2-project-structure)
-3. [System Requirements](#3-system-requirements)
-4. [Installation](#4-installation)
-   - [4.1 Backend Installation (Laravel)](#41-backend-installation-laravel)
-   - [4.2 Frontend Installation (React)](#42-frontend-installation-react)
-5. [Usage](#5-usage)
-6. [Testing](#6-testing)
-7. [Configuration](#7-configuration)
-8. [Contributing](#8-contributing)
-9. [Contact](#9-contact)
+2. [System Requirements](#2-system-requirements)
+3. [Installation](#3-installation)
+   - [4.1 Backend Installation (Laravel)](#31-backend-installation-laravel)
+   - [4.2 Frontend Installation (React)](#32-frontend-installation-react)
+4. [Usage](#4-usage)
+5. [Testing](#5-testing)
+6. [Configuration](#6-configuration)
+7. [Contributing](#7-contributing)
+8. [Contact](#8-contact)
 ---
 
 ## 1. Introduction
 
-ShoeStore is an online store dedicated to providing a wide range of high-quality shoes. Whether you're looking for the latest sneakers, classic boots, or stylish sandals, we have something for everyone. Our platform is built with Laravel for a robust backend and React for a smooth, responsive frontend, ensuring a seamless shopping experience.
+
+Travel Notebook is an application that helps you discover top tourist attractions in every destination you visit. Additionally, the app supports hotel booking to make your trips more convenient. Our application is built using React Native for the frontend and Node.js for the backend.
 
 
-## 2. Project Structure
 
-Below is the main folder structure of the project:
-
-- ├── BackEnd/        # Contains Laravel source code
-- ├── FrontEnd/       # Contains React source code
-- └── README.md       # This README file
-
-
-## 3. System Requirements
+## 2. System Requirements
 
 To run this project, you need to have the following software installed:
 
-- PHP >= 8.3
-- Composer >= 2.7
+- React >= 18
 - Node.js >= 16.0
 - NPM or Yarn
-- MySQL or other database management systems
-- Web browser with JavaScript support
-
 
 ## 4. Installation
 
