@@ -1,5 +1,5 @@
 import { ActivityIndicator, ScrollView,  Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import AppBar from '../../components/Reusable/AppBar'
 import { COLORS, SIZES, TEXT } from '../../constants/theme'
 import styles from './hotelDetails.style'
@@ -8,11 +8,18 @@ import reusable from '../../components/Reusable/reusable.style'
 import {Rating} from 'react-native-stock-star-rating'
 import {Feather} from '@expo/vector-icons'
 import fetchHotelById from '../../hook/fetchHotelById'
-import { useRoute } from '@react-navigation/native'
+import { useIsFocused, useRoute } from '@react-navigation/native'
 
 const HotelDetails = ({navigation}) => {
   const route = useRoute();
-  const id = route.params
+  const id = route.params;
+   const isFocused = useIsFocused();
+  
+    useEffect(() => {
+      if (isFocused) {
+        refetch();
+      }
+    }, [isFocused]);
   
   const {hotel,coordinates, isLoading, error, refetch} = fetchHotelById(id)
   

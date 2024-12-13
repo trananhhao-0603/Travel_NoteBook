@@ -1,18 +1,24 @@
 import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React from 'react'
-import { useRoute } from '@react-navigation/native'
+import React, { useEffect } from 'react'
+import { useIsFocused, useRoute } from '@react-navigation/native'
 import {DescriptionText, HeightSpacer, NetworkImage, ReusableBtn, ReusableText, } from '../../components/index'
 import AppBar from '../../components/Reusable/AppBar'
 import PopularHotelsList from '../../components/PopularList/PopularHotelsList'
 import { COLORS,  SIZES,  TEXT } from '../../constants/theme'
 import reusable from '../../components/Reusable/reusable.style'
-import {Feather} from '@expo/vector-icons'
 import fetchPlace from '../../hook/fetchPlace'
 import MiniMap from '../../components/Map/MiniMap'
 
 const PlaceDetails = ({navigation}) => {
   const route = useRoute();
   const id = route.params
+   const isFocused = useIsFocused();
+    
+      useEffect(() => {
+        if (isFocused) {
+          refetch();
+        }
+      }, [isFocused]);
   const {place, isLoading, coordinates,error, refetch} = fetchPlace(id)
   
   if (isLoading) {

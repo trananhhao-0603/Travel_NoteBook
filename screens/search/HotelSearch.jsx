@@ -63,7 +63,7 @@ const HotelSearch = ({navigation}) => {
             <View style={styles.title}>
               <ReusableTitle
                 item={item}
-                onPress={() => navigation.navigate("PlaceDetails", item._id)}
+                onPress={() => navigation.navigate("HotelDetails", item._id)}
               />
             </View>
           )}

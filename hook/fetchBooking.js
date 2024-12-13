@@ -36,7 +36,7 @@ const fetchBooking = () => {
         },
       });
       const bookingData = response.data
-      // console.log(bookingData);
+      console.log(bookingData);
       
 
       // Enrich data with hotel and room details
@@ -60,13 +60,15 @@ const fetchBooking = () => {
           };
         })
       );
+      if(enrichedBookings.length ===0){
+        setBooking([])
+      }
 
       setBooking(enrichedBookings);;
       
       
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'An error occurred');
-      console.log(err.message);
       
     } finally {
       setIsLoading(false);
