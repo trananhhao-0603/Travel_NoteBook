@@ -29,6 +29,15 @@ const ReusableTitle = ({item, onPress}) => {
 
             <HeightSpacer height={8}/>
 
+            <ReusableText
+            text= {` ${item.price}$/night `}
+            family={'medium'}
+            size={14}
+            color={COLORS.gray}
+            />
+
+            <HeightSpacer height={8}/>
+
             <View style={reusable.rowWithSpace('flex-start')}>
                 <Rating rating={item.rating}/>
 

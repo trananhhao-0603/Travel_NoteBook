@@ -16,7 +16,6 @@ const SelectRoom = ({navigation}) => {
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
   }
-//   const rooms =  [
 //     {
 //         "_id": "64c631650298a05640539adc",
 //         "country_id": "64c62bfc65af9f8c969a8d04",

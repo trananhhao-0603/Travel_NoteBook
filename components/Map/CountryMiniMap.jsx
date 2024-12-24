@@ -29,6 +29,7 @@ const CountryMiniMap = ({placeCoordinates}) => {
                 longitude: location.longitude,
               }}
               title={location.title}
+              
             />
           ))}
         </MapView>
