@@ -14,7 +14,7 @@ const Location = () => {
 
   useEffect(() => {
     refreshLocation(); // Lấy lại vị trí người dùng mỗi lần component mount
-  }, [refreshLocation]);
+  }, [refreshLocation,isFocused]);
 
   useEffect(() => {
     if (location && placeCoordinates.length > 0) {

@@ -66,12 +66,12 @@ const HotelDetails = ({navigation}) => {
 
               <ReusableText
                 text={hotel.location}
-                family={"medium"}
-                size={SIZES.medium}
+                family={"regular"}
+                size={SIZES.medium - 2}
                 color={COLORS.black}
               />
 
-              <HeightSpacer height={15} />
+              <HeightSpacer height={5} />
 
               <View style={reusable.rowWithSpace("space-between")}>
                 <Rating

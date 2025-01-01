@@ -17,7 +17,7 @@ const Home = ({navigation}) => {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
   }
   return (
-    <SafeAreaView style={reusable.container}>
+    <SafeAreaView style={[reusable.container, {marginTop: 0}]}>
       <View>
         <View style={reusable.rowWithSpace("space-between")}>
           <ReusableText

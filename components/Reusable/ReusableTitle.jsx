@@ -7,54 +7,63 @@ import ReusableText from '../Reusable/ReusableText'
 const ReusableTitle = ({item, onPress}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={reusable.rowWithSpace('flex-start')}>
-        <NetworkImage source={item.imageUrl} width={80} height={80} raidus={12}/>
-        <WidthSpacer width={15}/>
-        <View style={{paddingRight: 100}}>
-            <ReusableText
-            text= {item.title}
-            family={'medium'}
+      <View style={reusable.rowWithSpace("flex-start")}>
+        <NetworkImage
+          source={item.imageUrl}
+          width={80}
+          height={80}
+          raidus={12}
+        />
+        <WidthSpacer width={15} />
+        <View style={{ paddingRight: 100 }}>
+          <ReusableText
+            text={item.title}
+            family={"medium"}
             size={SIZES.medium}
             color={COLORS.black}
-            />
+          />
 
-            <HeightSpacer height={8}/>
+          <HeightSpacer height={8} />
 
-            <ReusableText
-            text= {item.location}
-            family={'medium'}
+          <ReusableText
+            text={item.location}
+            family={"medium"}
             size={10}
             color={COLORS.gray}
-            />
+          />
 
-            <HeightSpacer height={8}/>
+          <HeightSpacer height={8} />
+
+          {item.price && (
+            <ReusableText
+              text={`${item.price}$/night `}
+              family={"medium"}
+              size={14}
+              color={COLORS.gray}
+            />
+          )}
+          {item.price && (
+            <HeightSpacer height={8} />
+          )}
+
+          
+
+          <View style={reusable.rowWithSpace("flex-start")}>
+            <Rating rating={item.rating} />
+
+            <WidthSpacer width={5} />
 
             <ReusableText
-            text= {` ${item.price}$/night `}
-            family={'medium'}
-            size={14}
-            color={COLORS.gray}
+              text={` (${item.review}) `}
+              family={"medium"}
+              size={14}
+              color={COLORS.gray}
             />
-
-            <HeightSpacer height={8}/>
-
-            <View style={reusable.rowWithSpace('flex-start')}>
-                <Rating rating={item.rating}/>
-
-                <WidthSpacer width={5}/>
-
-                <ReusableText
-                text= {` (${item.review}) `}
-                family={'medium'}
-                size={14}
-                color={COLORS.gray}
-                />
-
-            </View>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
-  )
+  );
 }
 
 export default ReusableTitle
